@@ -1,11 +1,19 @@
-import { Hero, HowItWorks, Features } from "@/components/landing";
+import {
+  HeroSection,
+  StatisticsShowcase,
+  HowItWorksSection,
+  TestimonialsSection,
+  CTASection,
+} from "@/components/landing";
 
 export default function LandingPage() {
   return (
     <>
-      <Hero />
-      <HowItWorks />
-      <Features />
+      <HeroSection />
+      <StatisticsShowcase />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <CTASection />
     </>
   );
 }

@@ -36,7 +36,7 @@ export function Particles({
   const circles = useRef<Circle[]>([]);
   const mouse = useRef({ x: 0, y: 0 });
   const canvasSize = useRef({ w: 0, h: 0 });
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
   const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
 
   const circleParams = useCallback((): Circle => {
