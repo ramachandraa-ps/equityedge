@@ -10,8 +10,8 @@ const steps = [
     icon: Search,
     title: "Search Any Company",
     description: "Look up any listed Indian company and get instant access to fundamentals that matter.",
-    color: "var(--color-muted-teal)",
-    bgColor: "var(--color-soft-teal)",
+    color: "var(--color-accent)",
+    bgColor: "var(--color-accent-subtle)",
     link: "/company/search",
   },
   {
@@ -19,8 +19,8 @@ const steps = [
     icon: BookOpen,
     title: "Learn Key Metrics",
     description: "Understand P/E, ROE, and Debt-to-Equity with plain English explanations.",
-    color: "var(--color-amber-gold)",
-    bgColor: "rgba(212, 168, 83, 0.15)",
+    color: "var(--color-blue-600)",
+    bgColor: "rgba(59, 130, 246, 0.15)",
     link: "/company/search",
   },
   {
@@ -67,13 +67,13 @@ const itemVariants = {
 
 export function HowItWorksSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[var(--color-canvas)] relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-[var(--color-surface)] relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-deep-navy) 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-text-primary) 1px, transparent 0)`,
             backgroundSize: "48px 48px",
           }}
         />
@@ -88,13 +88,13 @@ export function HowItWorksSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-soft-teal)] text-[var(--color-muted-teal)] text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] text-sm font-medium mb-4">
             Your Learning Journey
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-deep-navy)] mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] mb-4">
             How EquityEdge Works
           </h2>
-          <p className="text-lg text-[var(--color-cool-gray)] max-w-2xl mx-auto">
+          <p className="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
             Four simple steps to transform from a tip-follower to a confident, informed investor.
           </p>
         </motion.div>
@@ -116,7 +116,7 @@ export function HowItWorksSection() {
                 className="group relative"
               >
                 <Link href={step.link}>
-                  <div className="relative h-full p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-surface-muted)] hover:border-[var(--color-muted-teal)]/40 transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
+                  <div className="relative h-full p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
                     {/* Step number watermark */}
                     <span
                       className="absolute -top-4 -right-2 text-[120px] font-black leading-none opacity-[0.03] select-none pointer-events-none"
@@ -145,17 +145,17 @@ export function HowItWorksSection() {
                             STEP {step.number}
                           </span>
                         </div>
-                        <h3 className="text-lg font-semibold text-[var(--color-deep-navy)] mb-2 group-hover:text-[var(--color-muted-teal)] transition-colors">
+                        <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
                           {step.title}
                         </h3>
-                        <p className="text-sm text-[var(--color-cool-gray)] leading-relaxed">
+                        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
                           {step.description}
                         </p>
                       </div>
 
                       {/* Arrow */}
                       <div className="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
-                        <ArrowRight className="w-5 h-5 text-[var(--color-muted-teal)]" />
+                        <ArrowRight className="w-5 h-5 text-[var(--color-accent)]" />
                       </div>
                     </div>
 
@@ -172,7 +172,7 @@ export function HowItWorksSection() {
         </motion.div>
 
         {/* Connection line decoration for desktop */}
-        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-[var(--color-surface-muted)] to-transparent pointer-events-none" />
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-[var(--color-border)] to-transparent pointer-events-none" />
       </div>
     </section>
   );

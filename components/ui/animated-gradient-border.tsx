@@ -21,7 +21,7 @@ export function AnimatedGradientBorder({
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(90deg, var(--color-amber-gold), var(--color-muted-teal), var(--color-amber-gold))",
+            "linear-gradient(90deg, var(--color-blue-500), var(--color-cyan-500), var(--color-blue-500))",
           backgroundSize: "200% 100%",
         }}
         animate={{
@@ -35,7 +35,7 @@ export function AnimatedGradientBorder({
       />
       <div
         className={cn(
-          "relative bg-[var(--color-canvas)] rounded-[calc(var(--radius-2xl)-2px)]",
+          "relative bg-[var(--color-surface)] rounded-[calc(var(--radius-2xl)-2px)]",
           className
         )}
       >

@@ -46,7 +46,7 @@ export function Modal({
     <div className="fixed inset-0 z-50">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-[var(--color-deep-navy)]/60 backdrop-blur-sm animate-in fade-in-0 duration-200"
+        className="fixed inset-0 bg-[var(--color-charcoal)]/60 backdrop-blur-sm animate-in fade-in-0 duration-200"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -59,7 +59,7 @@ export function Modal({
           aria-labelledby={title ? "modal-title" : undefined}
           aria-describedby={description ? "modal-description" : undefined}
           className={cn(
-            "relative bg-[var(--color-canvas)] rounded-[var(--radius-3xl)] shadow-lg w-full animate-in fade-in-0 zoom-in-95 duration-200",
+            "relative bg-[var(--color-surface)] rounded-[var(--radius-3xl)] shadow-lg w-full animate-in fade-in-0 zoom-in-95 duration-200",
             size === "default" && "max-w-[520px]",
             size === "large" && "max-w-[720px]",
             className
@@ -67,11 +67,11 @@ export function Modal({
         >
           {/* Header */}
           {(title || description) && (
-            <div className="p-6 pb-4 border-b border-[var(--color-surface-muted)]">
+            <div className="p-6 pb-4 border-b border-[var(--color-border)]">
               {title && (
                 <h2
                   id="modal-title"
-                  className="text-[var(--text-h2)] font-bold text-[var(--color-deep-navy)]"
+                  className="text-[var(--text-h2)] font-bold text-[var(--color-text-primary)]"
                 >
                   {title}
                 </h2>
@@ -79,7 +79,7 @@ export function Modal({
               {description && (
                 <p
                   id="modal-description"
-                  className="mt-1 text-[var(--text-body-sm)] text-[var(--color-cool-gray)]"
+                  className="mt-1 text-[var(--text-body-sm)] text-[var(--color-text-muted)]"
                 >
                   {description}
                 </p>
@@ -122,7 +122,7 @@ export function ModalFooter({ children, className }: ModalFooterProps) {
   return (
     <div
       className={cn(
-        "flex items-center justify-end gap-3 p-6 pt-4 border-t border-[var(--color-surface-muted)]",
+        "flex items-center justify-end gap-3 p-6 pt-4 border-t border-[var(--color-border)]",
         className
       )}
     >

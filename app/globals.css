@@ -371,6 +371,16 @@ body {
   display: none;
 }
 
+/* Alias for hide-scrollbar */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Blue glow effect */
 .glow-blue {
   box-shadow: var(--shadow-glow-blue);

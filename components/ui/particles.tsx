@@ -29,7 +29,7 @@ export function Particles({
   quantity = 50,
   staticity = 50,
   ease = 50,
-  color = "#D4A853",
+  color = "#3B82F6",
 }: ParticlesProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const context = useRef<CanvasRenderingContext2D | null>(null);

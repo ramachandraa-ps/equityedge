@@ -1,5 +1,6 @@
 import {
   HeroSection,
+  AIShowcaseScroll,
   StatisticsShowcase,
   HowItWorksSection,
   TestimonialsSection,
@@ -10,6 +11,7 @@ export default function LandingPage() {
   return (
     <>
       <HeroSection />
+      <AIShowcaseScroll />
       <StatisticsShowcase />
       <HowItWorksSection />
       <TestimonialsSection />

@@ -10,7 +10,10 @@
       "Skill(superpowers:execute-plan)",
       "Skill(superpowers:executing-plans)",
       "Bash(npm install:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:21st.dev)",
+      "WebSearch"
     ]
   }
 }
