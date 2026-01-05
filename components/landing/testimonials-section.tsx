@@ -27,7 +27,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   return (
-    <section className="py-20 lg:py-32 bg-gradient-to-b from-[var(--color-surface)] to-[var(--color-canvas)]">
+    <section className="py-20 lg:py-32 bg-gradient-to-b from-[var(--color-background)] to-[var(--color-surface)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -36,10 +36,10 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-soft-teal)] text-[var(--color-muted-teal)] text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] text-sm font-medium mb-4">
             Real Stories
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-deep-navy)] mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] mb-4">
             From Tip-Followers to Informed Investors
           </h2>
         </motion.div>
@@ -53,25 +53,25 @@ export function TestimonialsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className={cn(
-                "relative p-6 rounded-[var(--radius-2xl)] bg-[var(--color-canvas)] border border-[var(--color-surface-muted)] shadow-[var(--shadow-card)]",
+                "relative p-6 rounded-[var(--radius-2xl)] bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-card)]",
                 index === 1 && "md:-mt-4"
               )}
             >
-              <Quote className="absolute top-4 right-4 w-8 h-8 text-[var(--color-amber-gold)]/20" />
+              <Quote className="absolute top-4 right-4 w-8 h-8 text-[var(--color-accent)]/20" />
 
-              <p className="text-[var(--color-deep-navy)] leading-relaxed mb-6 relative z-10">
+              <p className="text-[var(--color-text-primary)] leading-relaxed mb-6 relative z-10">
                 &quot;{testimonial.quote}&quot;
               </p>
 
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-muted-teal)] to-[var(--color-slate-blue)] flex items-center justify-center text-[var(--color-warm-white)] font-bold">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[var(--color-blue-500)] to-[var(--color-blue-600)] flex items-center justify-center text-white font-bold">
                   {testimonial.avatar}
                 </div>
                 <div>
-                  <p className="font-semibold text-[var(--color-deep-navy)]">
+                  <p className="font-semibold text-[var(--color-text-primary)]">
                     {testimonial.author}
                   </p>
-                  <p className="text-sm text-[var(--color-cool-gray)]">
+                  <p className="text-sm text-[var(--color-text-muted)]">
                     {testimonial.role}
                   </p>
                 </div>

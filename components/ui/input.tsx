@@ -4,14 +4,14 @@ import { Search } from "lucide-react";
 import { cn } from "@/lib/cn";
 
 const inputVariants = cva(
-  "flex w-full rounded-[var(--radius-lg)] text-[var(--text-body)] transition-all duration-150 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[var(--color-cool-gray)] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+  "flex w-full rounded-[var(--radius-lg)] text-[var(--text-body)] transition-all duration-150 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[var(--color-text-muted)] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
         default:
-          "h-[52px] bg-[var(--color-surface-subtle)] border-[1.5px] border-transparent px-4 focus:bg-[var(--color-canvas)] focus:border-[var(--color-muted-teal)]",
+          "h-[52px] bg-[var(--color-surface-subtle)] border-[1.5px] border-transparent px-4 focus:bg-[var(--color-surface)] focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent)]/10",
         search:
-          "h-12 bg-[var(--color-canvas)] border border-[var(--color-surface-muted)] pl-12 pr-4 focus:border-[var(--color-muted-teal)] focus:ring-4 focus:ring-[var(--color-muted-teal)]/10",
+          "h-12 bg-[var(--color-surface)] border border-[var(--color-border)] pl-12 pr-4 focus:border-[var(--color-accent)] focus:ring-4 focus:ring-[var(--color-accent)]/10",
       },
     },
     defaultVariants: {
@@ -31,7 +31,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     if (variant === "search") {
       return (
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--color-cool-gray)]" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-[var(--color-text-muted)]" />
           <input
             type={type}
             className={cn(

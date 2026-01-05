@@ -94,7 +94,7 @@ export default function CompanyDetailPage() {
             </Badge>
           </div>
           <div className="mt-2 flex items-center gap-4">
-            <Badge variant="sector">{company.sector}</Badge>
+            <Badge variant="blue">{company.sector}</Badge>
             <span className="text-[var(--text-body-sm)] text-[var(--color-cool-gray)]">
               {company.industry}
             </span>

@@ -8,19 +8,19 @@ const badgeVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[var(--color-surface-subtle)] text-[var(--color-slate-blue)]",
+          "bg-[var(--color-surface-subtle)] text-[var(--color-text-secondary)]",
         success:
           "bg-[var(--color-success-light)] text-[var(--color-success)]",
         warning:
-          "bg-[var(--color-warning-light)] text-[#B88B1D]",
+          "bg-[var(--color-warning-light)] text-[#B45309]",
         error:
           "bg-[var(--color-error-light)] text-[var(--color-error)]",
         info:
           "bg-[var(--color-info-light)] text-[var(--color-info)]",
-        sector:
-          "bg-[var(--color-soft-teal)] text-[var(--color-muted-teal)]",
+        blue:
+          "bg-[var(--color-accent-subtle)] text-[var(--color-accent)]",
         outline:
-          "border border-[var(--color-surface-muted)] text-[var(--color-cool-gray)]",
+          "border border-[var(--color-border)] text-[var(--color-text-muted)]",
       },
       size: {
         sm: "text-[10px] px-2 py-0.5",

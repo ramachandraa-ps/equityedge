@@ -24,15 +24,15 @@ export function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[var(--color-canvas)] border-b border-[var(--color-surface-muted)] shadow-sm">
+    <header className="sticky top-0 z-40 w-full bg-[var(--color-surface)] border-b border-[var(--color-border)] shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-xl font-bold text-[var(--color-deep-navy)]"
+            className="flex items-center gap-2 text-xl font-bold text-[var(--color-text-primary)]"
           >
-            <span className="text-[var(--color-amber-gold)]">Equity</span>
+            <span className="text-[var(--color-accent)]">Equity</span>
             <span>Edge</span>
           </Link>
 
@@ -47,8 +47,8 @@ export function Navbar() {
                   className={cn(
                     "px-4 py-2 rounded-[var(--radius-lg)] text-[var(--text-body)] font-medium transition-colors",
                     isActive
-                      ? "bg-[var(--color-soft-teal)] text-[var(--color-muted-teal)]"
-                      : "text-[var(--color-cool-gray)] hover:text-[var(--color-deep-navy)] hover:bg-[var(--color-surface-subtle)]"
+                      ? "bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"
+                      : "text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-subtle)]"
                   )}
                 >
                   {link.label}
@@ -94,7 +94,7 @@ export function Navbar() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-[var(--color-surface-muted)] animate-in slide-in-from-top-2 duration-200">
+          <div className="md:hidden py-4 border-t border-[var(--color-border)] animate-in slide-in-from-top-2 duration-200">
             <div className="flex flex-col gap-1">
               {navLinks.map((link) => {
                 const isActive = pathname.startsWith(link.href);
@@ -106,8 +106,8 @@ export function Navbar() {
                     className={cn(
                       "px-4 py-3 rounded-[var(--radius-lg)] text-[var(--text-body)] font-medium transition-colors",
                       isActive
-                        ? "bg-[var(--color-soft-teal)] text-[var(--color-muted-teal)]"
-                        : "text-[var(--color-cool-gray)] hover:bg-[var(--color-surface-subtle)]"
+                        ? "bg-[var(--color-accent-subtle)] text-[var(--color-accent)]"
+                        : "text-[var(--color-text-muted)] hover:bg-[var(--color-surface-subtle)]"
                     )}
                   >
                     {link.label}

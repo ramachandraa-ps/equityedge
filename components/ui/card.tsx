@@ -8,13 +8,15 @@ const cardVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-[var(--color-canvas)] border border-[var(--color-surface-muted)] shadow-[var(--shadow-card)]",
+          "bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-card)]",
         elevated:
-          "bg-[var(--color-canvas)] border border-[var(--color-surface-muted)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5",
+          "bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-card-hover)] hover:-translate-y-0.5",
         metric:
-          "bg-[var(--color-deep-navy)] text-[var(--color-warm-white)] shadow-[var(--shadow-lg)]",
+          "bg-gradient-to-br from-[var(--color-charcoal)] to-[var(--color-midnight)] text-white shadow-[var(--shadow-lg)]",
         learning:
-          "bg-gradient-to-b from-white to-[var(--color-surface)] border border-[var(--color-surface-muted)] overflow-hidden",
+          "bg-gradient-to-b from-white to-[var(--color-surface-subtle)] border border-[var(--color-border)] overflow-hidden dark:from-[var(--color-midnight)] dark:to-[var(--color-charcoal)]",
+        interactive:
+          "bg-[var(--color-surface)] border border-[var(--color-border)] shadow-[var(--shadow-card)] hover:border-[var(--color-accent)] hover:shadow-[var(--shadow-card-hover)] cursor-pointer",
         ghost:
           "bg-transparent",
       },
@@ -59,7 +61,7 @@ const CardTitle = React.forwardRef<
   <h3
     ref={ref}
     className={cn(
-      "text-[var(--text-h3)] font-semibold leading-tight tracking-tight",
+      "text-[var(--text-h3)] font-semibold leading-tight tracking-tight text-[var(--color-text-primary)]",
       className
     )}
     {...props}
@@ -73,7 +75,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-[var(--text-body-sm)] text-[var(--color-cool-gray)]", className)}
+    className={cn("text-[var(--text-body-sm)] text-[var(--color-text-muted)]", className)}
     {...props}
   />
 ));

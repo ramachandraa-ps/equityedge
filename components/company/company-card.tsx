@@ -42,7 +42,7 @@ export function CompanyCard({ company, index = 0 }: CompanyCardProps) {
                   </Badge>
                 </div>
                 <div className="mt-1 flex items-center gap-3">
-                  <Badge variant="sector" size="sm">
+                  <Badge variant="blue" size="sm">
                     {company.sector}
                   </Badge>
                   <span className="text-[var(--text-body-xs)] text-[var(--color-cool-gray)]">

@@ -79,9 +79,9 @@ export function Tooltip({
           className={cn(
             "fixed z-50 animate-in fade-in-0 zoom-in-95 duration-150",
             variant === "default" &&
-              "bg-[var(--color-deep-navy)] text-[var(--color-warm-white)] px-3 py-2 rounded-[var(--radius-md)] text-sm max-w-[280px] shadow-lg",
+              "bg-[var(--color-charcoal)] text-white px-3 py-2 rounded-[var(--radius-md)] text-sm max-w-[280px] shadow-lg dark:bg-[var(--color-zinc-100)] dark:text-[var(--color-charcoal)]",
             variant === "educational" &&
-              "bg-[var(--color-canvas)] border border-[var(--color-surface-muted)] p-4 rounded-[var(--radius-xl)] max-w-[360px] shadow-lg",
+              "bg-[var(--color-surface)] border border-[var(--color-border)] p-4 rounded-[var(--radius-xl)] max-w-[360px] shadow-lg",
             className
           )}
           style={{
@@ -114,12 +114,12 @@ export function EducationalTooltip({
       variant="educational"
       content={
         <div className="space-y-2">
-          <h4 className="font-semibold text-[var(--color-slate-blue)]">{title}</h4>
-          <p className="text-sm text-[var(--color-cool-gray)]">{description}</p>
+          <h4 className="font-semibold text-[var(--color-text-primary)]">{title}</h4>
+          <p className="text-sm text-[var(--color-text-muted)]">{description}</p>
           {learnMoreHref && (
             <a
               href={learnMoreHref}
-              className="text-sm text-[var(--color-muted-teal)] hover:underline inline-flex items-center gap-1"
+              className="text-sm text-[var(--color-accent)] hover:underline inline-flex items-center gap-1"
             >
               Learn more →
             </a>

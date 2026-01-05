@@ -4,20 +4,20 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-muted-teal)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         primary:
-          "bg-[var(--color-amber-gold)] text-[var(--color-deep-navy)] shadow-[var(--shadow-gold)] hover:bg-[var(--color-warm-amber)] hover:shadow-[var(--shadow-gold-hover)] active:scale-[0.98]",
+          "bg-gradient-to-r from-[var(--color-blue-500)] to-[var(--color-blue-600)] text-white shadow-[var(--shadow-button)] hover:shadow-[var(--shadow-button-hover)] hover:brightness-110 active:scale-[0.98]",
         secondary:
-          "border-[1.5px] border-[var(--color-muted-teal)] text-[var(--color-muted-teal)] bg-transparent hover:bg-[var(--color-soft-teal)] active:scale-[0.98]",
+          "border-[1.5px] border-[var(--color-border)] bg-transparent text-[var(--color-text-primary)] hover:bg-[var(--color-surface-subtle)] hover:border-[var(--color-accent)] active:scale-[0.98]",
         ghost:
-          "text-[var(--color-muted-teal)] hover:bg-[var(--color-surface-subtle)] hover:text-[var(--color-slate-blue)]",
+          "text-[var(--color-accent)] hover:bg-[var(--color-accent-subtle)] hover:text-[var(--color-accent-hover)]",
         destructive:
-          "bg-[var(--color-error)] text-white shadow-sm hover:bg-[#D4533B] active:scale-[0.98]",
+          "bg-[var(--color-error)] text-white shadow-sm hover:bg-[#DC2626] active:scale-[0.98]",
         link:
-          "text-[var(--color-muted-teal)] underline-offset-4 hover:underline",
+          "text-[var(--color-accent)] underline-offset-4 hover:underline",
       },
       size: {
         sm: "h-9 px-4 text-sm rounded-[var(--radius-md)]",

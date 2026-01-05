@@ -1,124 +1,86 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, BookOpen, LineChart, Bot, CheckCircle2 } from "lucide-react";
-import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
-import { TextShimmer } from "@/components/ui/text-shimmer";
+import { Search, BookOpen, LineChart, Bot, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 const steps = [
   {
-    icon: <Search className="w-5 h-5" />,
+    number: "01",
+    icon: Search,
     title: "Search Any Company",
-    description: "Look up any listed Indian company. We'll show you the fundamentals that matter, not the noise.",
-    className: "md:col-span-3",
-    header: (
-      <div className="relative h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-soft-teal)] to-[var(--color-surface-subtle)] flex items-center justify-center overflow-hidden">
-        <motion.div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: `linear-gradient(90deg, transparent 0%, var(--color-muted-teal) 50%, transparent 100%)`,
-            backgroundSize: "200% 100%",
-          }}
-          animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-        />
-        <div className="relative px-5 py-2.5 rounded-full bg-[var(--color-canvas)] shadow-lg border border-[var(--color-surface-muted)] flex items-center gap-2">
-          <Search className="w-4 h-4 text-[var(--color-cool-gray)]" />
-          <span className="text-sm text-[var(--color-deep-navy)]">Search &quot;Reliance&quot;...</span>
-        </div>
-      </div>
-    ),
+    description: "Look up any listed Indian company and get instant access to fundamentals that matter.",
+    color: "var(--color-muted-teal)",
+    bgColor: "var(--color-soft-teal)",
+    link: "/company/search",
   },
   {
-    icon: <BookOpen className="w-5 h-5" />,
+    number: "02",
+    icon: BookOpen,
     title: "Learn Key Metrics",
-    description: "Understand P/E, ROE, Debt-to-Equity with plain English explanations.",
-    className: "md:col-span-2",
-    header: (
-      <div className="h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-amber-gold)]/20 to-[var(--color-surface-subtle)] flex items-center justify-center p-3">
-        <div className="space-y-1.5 w-full">
-          {["P/E Ratio", "Return on Equity", "Debt-to-Equity"].map((metric, i) => (
-            <motion.div
-              key={metric}
-              initial={{ x: -20, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--color-canvas)]/80 backdrop-blur"
-            >
-              <span className="text-xs font-medium text-[var(--color-deep-navy)]">{metric}</span>
-              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-success)]" />
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    ),
+    description: "Understand P/E, ROE, and Debt-to-Equity with plain English explanations.",
+    color: "var(--color-amber-gold)",
+    bgColor: "rgba(212, 168, 83, 0.15)",
+    link: "/company/search",
   },
   {
-    icon: <LineChart className="w-5 h-5" />,
+    number: "03",
+    icon: LineChart,
     title: "Analyze Trends",
     description: "See 5-year revenue, profit, and cash flow trends. Spot red flags early.",
-    className: "md:col-span-2",
-    header: (
-      <div className="h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-muted-teal)]/10 to-[var(--color-surface-subtle)] flex items-center justify-center p-3">
-        <svg viewBox="0 0 200 80" className="w-full h-full">
-          <motion.path
-            d="M 10,60 Q 50,40 80,50 T 130,35 T 190,20"
-            fill="none"
-            stroke="var(--color-muted-teal)"
-            strokeWidth="3"
-            strokeLinecap="round"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-          />
-          <motion.path
-            d="M 10,70 Q 50,65 80,60 T 130,50 T 190,45"
-            fill="none"
-            stroke="var(--color-amber-gold)"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeDasharray="4 4"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.5, ease: "easeOut", delay: 0.3 }}
-          />
-        </svg>
-      </div>
-    ),
+    color: "var(--color-success)",
+    bgColor: "var(--color-success-light)",
+    link: "/market-statistics",
   },
   {
-    icon: <Bot className="w-5 h-5" />,
-    title: "Ask Our AI Assistant",
-    description: "Have questions? Our AI explains complex concepts in simple terms.",
-    className: "md:col-span-3",
-    header: (
-      <div className="h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-slate-blue)]/5 to-[var(--color-surface-subtle)] flex items-end p-3">
-        <div className="w-full space-y-1.5">
-          <div className="flex justify-end">
-            <div className="px-3 py-1.5 rounded-2xl rounded-br-sm bg-[var(--color-muted-teal)] text-white text-xs max-w-[160px]">
-              What does high P/E ratio mean?
-            </div>
-          </div>
-          <div className="flex justify-start">
-            <div className="px-3 py-1.5 rounded-2xl rounded-bl-sm bg-[var(--color-surface-muted)] text-[var(--color-deep-navy)] text-xs max-w-[220px]">
-              <TextShimmer shimmerWidth={50} as="span">
-                A high P/E suggests investors expect strong future growth...
-              </TextShimmer>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
+    number: "04",
+    icon: Bot,
+    title: "Ask AI Assistant",
+    description: "Get complex concepts explained in simple terms. It teaches, never recommends.",
+    color: "var(--color-info)",
+    bgColor: "var(--color-info-light)",
+    link: "/ai-assistant",
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as const,
+    },
+  },
+};
+
 export function HowItWorksSection() {
   return (
-    <section className="py-20 lg:py-32 bg-[var(--color-surface)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-24 lg:py-32 bg-[var(--color-canvas)] relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-deep-navy) 1px, transparent 0)`,
+            backgroundSize: "48px 48px",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -137,19 +99,80 @@ export function HowItWorksSection() {
           </p>
         </motion.div>
 
-        <BentoGrid className="md:auto-rows-[220px]">
-          {steps.map((step, index) => (
-            <BentoGridItem
-              key={index}
-              title={step.title}
-              description={step.description}
-              header={step.header}
-              icon={step.icon}
-              className={step.className}
-              index={index}
-            />
-          ))}
-        </BentoGrid>
+        {/* Steps Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {steps.map((step, index) => {
+            const Icon = step.icon;
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group relative"
+              >
+                <Link href={step.link}>
+                  <div className="relative h-full p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-surface-muted)] hover:border-[var(--color-muted-teal)]/40 transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
+                    {/* Step number watermark */}
+                    <span
+                      className="absolute -top-4 -right-2 text-[120px] font-black leading-none opacity-[0.03] select-none pointer-events-none"
+                      style={{ color: step.color }}
+                    >
+                      {step.number}
+                    </span>
+
+                    {/* Content */}
+                    <div className="relative z-10 flex gap-4">
+                      {/* Icon */}
+                      <div
+                        className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+                        style={{ backgroundColor: step.bgColor }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: step.color }} />
+                      </div>
+
+                      {/* Text */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span
+                            className="text-xs font-bold tracking-wider"
+                            style={{ color: step.color }}
+                          >
+                            STEP {step.number}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-semibold text-[var(--color-deep-navy)] mb-2 group-hover:text-[var(--color-muted-teal)] transition-colors">
+                          {step.title}
+                        </h3>
+                        <p className="text-sm text-[var(--color-cool-gray)] leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+
+                      {/* Arrow */}
+                      <div className="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
+                        <ArrowRight className="w-5 h-5 text-[var(--color-muted-teal)]" />
+                      </div>
+                    </div>
+
+                    {/* Bottom accent line */}
+                    <div
+                      className="absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
+                      style={{ backgroundColor: step.color }}
+                    />
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Connection line decoration for desktop */}
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-[var(--color-surface-muted)] to-transparent pointer-events-none" />
       </div>
     </section>
   );

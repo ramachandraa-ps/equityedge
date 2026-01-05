@@ -73,7 +73,7 @@ export function ChatMessageBubble({ message }: ChatMessageProps) {
                   key={i}
                   variant={
                     source.type === "ratio"
-                      ? "sector"
+                      ? "blue"
                       : source.type === "company"
                       ? "outline"
                       : "default"

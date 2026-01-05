@@ -36,18 +36,18 @@ const featureCards = [
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[var(--color-surface)] via-[var(--color-canvas)] to-[var(--color-surface)]">
+    <section className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-[var(--color-background)] via-[var(--color-surface)] to-[var(--color-background)]">
       {/* Animated Particles Background */}
       <Particles
         className="absolute inset-0 z-0"
         quantity={80}
         staticity={30}
-        color="#D4A853"
+        color="#3B82F6"
       />
 
       {/* Gradient Orbs */}
-      <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-[var(--color-amber-gold)]/10 blur-[120px] animate-pulse" />
-      <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] rounded-full bg-[var(--color-muted-teal)]/10 blur-[100px] animate-pulse" style={{ animationDelay: "1s" }} />
+      <div className="absolute top-1/4 -left-1/4 w-[600px] h-[600px] rounded-full bg-[var(--color-blue-500)]/10 blur-[120px] animate-pulse" />
+      <div className="absolute bottom-1/4 -right-1/4 w-[500px] h-[500px] rounded-full bg-[var(--color-cyan-500)]/10 blur-[100px] animate-pulse" style={{ animationDelay: "1s" }} />
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -63,26 +63,26 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-soft-teal)] border border-[var(--color-muted-teal)]/20 text-[var(--color-muted-teal)] text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--color-accent-subtle)] border border-[var(--color-accent)]/20 text-[var(--color-accent)] text-sm font-medium mb-6"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-muted-teal)] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-muted-teal)]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-accent)] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-accent)]"></span>
               </span>
               Education-first platform for Indian investors
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--color-deep-navy)] leading-tight mb-4">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--color-text-primary)] leading-tight mb-4">
               Learn to{" "}
               <span className="relative inline-block">
                 <TextRotate
                   texts={rotatingTexts}
                   interval={3000}
-                  className="text-[var(--color-amber-gold)]"
+                  className="text-[var(--color-accent)]"
                 />
                 <motion.span
-                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-amber-gold)] to-[var(--color-copper-glow)] rounded-full"
+                  className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-[var(--color-blue-500)] to-[var(--color-blue-600)] rounded-full"
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
@@ -90,12 +90,12 @@ export function HeroSection() {
               </span>
             </h1>
 
-            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--color-slate-blue)] mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[var(--color-text-secondary)] mb-6">
               Not Tips.
             </h2>
 
             {/* Description */}
-            <p className="text-lg text-[var(--color-cool-gray)] max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+            <p className="text-lg text-[var(--color-text-muted)] max-w-xl mx-auto lg:mx-0 mb-8 leading-relaxed">
               Stop chasing tips that lose money. Start understanding the fundamentals
               that build wealth. EquityEdge teaches you to analyze companies like
               professional investors.
@@ -130,17 +130,17 @@ export function HeroSection() {
                 {[...Array(4)].map((_, i) => (
                   <div
                     key={i}
-                    className="w-10 h-10 rounded-full border-2 border-[var(--color-canvas)] bg-gradient-to-br from-[var(--color-muted-teal)] to-[var(--color-slate-blue)] flex items-center justify-center text-[var(--color-warm-white)] text-xs font-bold"
+                    className="w-10 h-10 rounded-full border-2 border-[var(--color-surface)] bg-gradient-to-br from-[var(--color-blue-500)] to-[var(--color-blue-600)] flex items-center justify-center text-white text-xs font-bold"
                   >
                     {String.fromCharCode(65 + i)}
                   </div>
                 ))}
               </div>
               <div className="text-left">
-                <p className="text-sm font-semibold text-[var(--color-deep-navy)]">
+                <p className="text-sm font-semibold text-[var(--color-text-primary)]">
                   10,000+ learners
                 </p>
-                <p className="text-xs text-[var(--color-cool-gray)]">
+                <p className="text-xs text-[var(--color-text-muted)]">
                   Building financial literacy
                 </p>
               </div>
@@ -169,9 +169,9 @@ export function HeroSection() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-6 h-10 rounded-full border-2 border-[var(--color-cool-gray)]/30 flex items-start justify-center p-2"
+          className="w-6 h-10 rounded-full border-2 border-[var(--color-text-muted)]/30 flex items-start justify-center p-2"
         >
-          <motion.div className="w-1.5 h-1.5 rounded-full bg-[var(--color-amber-gold)]" />
+          <motion.div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)]" />
         </motion.div>
       </motion.div>
     </section>

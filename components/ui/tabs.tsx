@@ -61,7 +61,7 @@ export function TabsList({ children, className }: TabsListProps) {
     <div
       role="tablist"
       className={cn(
-        "flex gap-1 border-b-2 border-[var(--color-surface-muted)]",
+        "flex gap-1 border-b-2 border-[var(--color-border)]",
         className
       )}
     >
@@ -88,8 +88,8 @@ export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
       className={cn(
         "px-5 py-2.5 text-[var(--text-body)] font-medium transition-colors -mb-[2px] border-b-2",
         isActive
-          ? "text-[var(--color-muted-teal)] border-[var(--color-muted-teal)]"
-          : "text-[var(--color-cool-gray)] border-transparent hover:text-[var(--color-slate-blue)]",
+          ? "text-[var(--color-accent)] border-[var(--color-accent)]"
+          : "text-[var(--color-text-muted)] border-transparent hover:text-[var(--color-text-primary)]",
         className
       )}
     >
