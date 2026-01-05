@@ -3,44 +3,36 @@
 import { motion } from "framer-motion";
 import { Search, BookOpen, LineChart, Bot, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { Plasma } from "@/components/ui/plasma";
-import { CardSpotlight } from "@/components/ui/card-spotlight";
+import { AnimatedMeshGradient } from "@/components/ui/animated-mesh-gradient";
+import { SpotlightCard } from "@/components/ui/spotlight-card";
 
 const steps = [
   {
-    number: "01",
     icon: Search,
     title: "Search Any Company",
     description: "Look up any listed Indian company and get instant access to fundamentals that matter.",
-    // color: "#2563eb", // blue-600
-    canvasColors: [[59, 130, 246]], // blue
+    spotlightColor: "rgba(59, 130, 246, 0.15)",
     link: "/company/search",
   },
   {
-    number: "02",
     icon: BookOpen,
     title: "Learn Key Metrics",
     description: "Understand P/E, ROE, and Debt-to-Equity with plain English explanations.",
-    // color: "#a855f7", // purple-500
-    canvasColors: [[168, 85, 247]], // purple
+    spotlightColor: "rgba(168, 85, 247, 0.15)",
     link: "/company/search",
   },
   {
-    number: "03",
     icon: LineChart,
     title: "Analyze Trends",
     description: "See 5-year revenue, profit, and cash flow trends. Spot red flags early.",
-    // color: "#10b981", // emerald-500
-    canvasColors: [[16, 185, 129]], // emerald
+    spotlightColor: "rgba(16, 185, 129, 0.15)",
     link: "/market-statistics",
   },
   {
-    number: "04",
     icon: Bot,
     title: "Ask AI Assistant",
     description: "Get complex concepts explained in simple terms. It teaches, never recommends.",
-    // color: "#f97316", // orange-500
-    canvasColors: [[249, 115, 22]], // orange
+    spotlightColor: "rgba(249, 115, 22, 0.15)",
     link: "/ai-assistant",
   },
 ];
@@ -48,18 +40,14 @@ const steps = [
 export function HowItWorksSection() {
   return (
     <section className="py-24 lg:py-32 bg-black relative overflow-hidden antialiased">
-      {/* Plasma background covering the entire section */}
+      {/* Animated gradient background - performant CSS replacement for Plasma */}
       <div className="absolute inset-0 z-0">
-        <Plasma
-          color="#3b82f6" // Brighter blue
-          speed={0.5}
-          direction="forward"
-          scale={1.2}
-          opacity={0.6}
-          mouseInteractive={true}
+        <AnimatedMeshGradient
+          color="#3b82f6"
+          speed={25}
+          opacity={0.5}
         />
-        {/* Lighter overlay to show plasma */}
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 bg-black/30" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -84,7 +72,7 @@ export function HowItWorksSection() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
@@ -92,17 +80,20 @@ export function HowItWorksSection() {
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
               >
-                <Link href={step.link} className="block h-full">
-                  <CardSpotlight className="h-full flex flex-col justify-between p-8 bg-neutral-900/50 border-neutral-800 hover:border-neutral-700 transition-colors group cursor-pointer">
-                    <div className="relative z-20">
-                      <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center mb-6 group-hover:bg-neutral-700 transition-colors">
-                        <Icon className="w-6 h-6 text-neutral-300 group-hover:text-white transition-colors" />
-                      </div>
+                <Link href={step.link} className="block h-full group">
+                  <SpotlightCard
+                    className="h-full p-8"
+                    spotlightColor={step.spotlightColor}
+                  >
+                    <div className="flex flex-col justify-between h-full">
+                      <div>
+                        <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center mb-6 group-hover:bg-neutral-700 transition-colors">
+                          <Icon className="w-6 h-6 text-neutral-300 group-hover:text-white transition-colors" />
+                        </div>
 
-                      <div className="mb-4">
                         <span className="text-sm font-mono text-neutral-500 mb-2 block">0{index + 1}</span>
                         <h3 className="text-xl font-bold text-neutral-100 mb-2 group-hover:text-white transition-colors">
                           {step.title}
@@ -111,27 +102,13 @@ export function HowItWorksSection() {
                           {step.description}
                         </p>
                       </div>
-                    </div>
 
-                    <div className="relative z-20 mt-6 flex items-center text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">
-                      <span>Get Started</span>
-                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      <div className="mt-6 flex items-center text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">
+                        <span>Get Started</span>
+                        <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                      </div>
                     </div>
-
-                    {/* Custom reveal colors per card if supported by CardSpotlight/CanvasReveal, 
-                            currently CardSpotlight has hardcoded colors or takes a prop? 
-                            Let's check CardSpotlight definition I made. 
-                            It takes 'radius', 'color' (for slotlight), but CanvasReveal colors are inside it.
-                            I should pass children to CardSpotlight that ARE the CanvasReveal for customizability, 
-                            OR modify CardSpotlight to accept colors.
-                            
-                            Wait, my previous CardSpotlight implementation has CanvasRevealEffect HARDCODED inside it.
-                            I should probably update CardSpotlight to accept 'canvasRevealColors' prop or similar,
-                            OR I can stick to the blue/purple generic one I made which looks good on dark.
-                            
-                            For now, I'll stick to the implementation I wrote which has a nice generic reveal.
-                        */}
-                  </CardSpotlight>
+                  </SpotlightCard>
                 </Link>
               </motion.div>
             );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { cn } from "@/lib/cn";
 
 interface ParticlesProps {
@@ -26,7 +26,7 @@ interface Circle {
 
 export function Particles({
   className,
-  quantity = 50,
+  quantity = 30, // Reduced from 50 for better performance
   staticity = 50,
   ease = 50,
   color = "#3B82F6",
@@ -37,20 +37,34 @@ export function Particles({
   const mouse = useRef({ x: 0, y: 0 });
   const canvasSize = useRef({ w: 0, h: 0 });
   const animationRef = useRef<number | null>(null);
-  const dpr = typeof window !== "undefined" ? window.devicePixelRatio : 1;
+  const isVisible = useRef(true);
+  const lastMouseUpdate = useRef(0);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  const dpr = typeof window !== "undefined"
+    ? Math.min(window.devicePixelRatio, 2) // Cap DPR at 2 for performance
+    : 1;
+
+  // Check for reduced motion preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
   const circleParams = useCallback((): Circle => {
     const x = Math.floor(Math.random() * canvasSize.current.w);
     const y = Math.floor(Math.random() * canvasSize.current.h);
-    const translateX = 0;
-    const translateY = 0;
     const size = Math.floor(Math.random() * 2) + 1;
     const alpha = 0;
     const targetAlpha = parseFloat((Math.random() * 0.6 + 0.1).toFixed(1));
-    const dx = (Math.random() - 0.5) * 0.2;
-    const dy = (Math.random() - 0.5) * 0.2;
+    const dx = (Math.random() - 0.5) * 0.15; // Slightly slower movement
+    const dy = (Math.random() - 0.5) * 0.15;
     const magnetism = 0.1 + Math.random() * 4;
-    return { x, y, translateX, translateY, size, alpha, targetAlpha, dx, dy, magnetism };
+    return { x, y, translateX: 0, translateY: 0, size, alpha, targetAlpha, dx, dy, magnetism };
   }, []);
 
   const drawCircle = useCallback((circle: Circle, update = false) => {
@@ -71,7 +85,11 @@ export function Particles({
 
   const drawParticles = useCallback(() => {
     circles.current = [];
-    for (let i = 0; i < quantity; i++) {
+    // Reduce particles on mobile
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? Math.floor(quantity * 0.5) : quantity;
+
+    for (let i = 0; i < particleCount; i++) {
       const circle = circleParams();
       drawCircle(circle);
     }
@@ -101,9 +119,16 @@ export function Particles({
   };
 
   const animate = useCallback(() => {
+    // Don't animate if not visible or reduced motion is preferred
+    if (!isVisible.current || prefersReducedMotion) {
+      animationRef.current = requestAnimationFrame(animate);
+      return;
+    }
+
     if (context.current) {
       context.current.clearRect(0, 0, canvasSize.current.w, canvasSize.current.h);
     }
+
     circles.current.forEach((circle, i) => {
       const edge = [
         circle.x + circle.translateX - circle.size,
@@ -111,7 +136,7 @@ export function Particles({
         circle.y + circle.translateY - circle.size,
         canvasSize.current.h - circle.y - circle.translateY - circle.size,
       ];
-      const closestEdge = edge.reduce((a, b) => Math.min(a, b));
+      const closestEdge = Math.min(...edge);
       const remapClosestEdge = parseFloat(
         remapValue(closestEdge, 0, 20, 0, 1).toFixed(2)
       );
@@ -141,8 +166,34 @@ export function Particles({
         drawCircle(circle, true);
       }
     });
-    animationRef.current = window.requestAnimationFrame(animate);
-  }, [staticity, ease, circleParams, drawCircle]);
+    animationRef.current = requestAnimationFrame(animate);
+  }, [staticity, ease, circleParams, drawCircle, prefersReducedMotion]);
+
+  // Visibility observer - pause animation when not in view
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible.current = entries[0].isIntersecting;
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
+
+  // Tab visibility - pause when tab is hidden
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      isVisible.current = !document.hidden;
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -162,13 +213,19 @@ export function Particles({
     return () => {
       window.removeEventListener("resize", initCanvas);
       if (animationRef.current) {
-        window.cancelAnimationFrame(animationRef.current);
+        cancelAnimationFrame(animationRef.current);
       }
     };
   }, [resizeCanvas, drawParticles, animate]);
 
+  // Throttled mouse move handler
   useEffect(() => {
     const onMouseMove = (e: MouseEvent) => {
+      // Throttle to ~60fps (16ms)
+      const now = performance.now();
+      if (now - lastMouseUpdate.current < 16) return;
+      lastMouseUpdate.current = now;
+
       if (canvasRef.current) {
         const rect = canvasRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left - canvasSize.current.w / 2;
@@ -177,9 +234,14 @@ export function Particles({
       }
     };
 
-    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mousemove", onMouseMove, { passive: true });
     return () => window.removeEventListener("mousemove", onMouseMove);
   }, []);
+
+  // Don't render if reduced motion is strongly preferred
+  if (prefersReducedMotion) {
+    return null;
+  }
 
   return (
     <canvas

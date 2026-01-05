@@ -2,9 +2,9 @@
 
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { InfiniteSlider } from '@/components/ui/infinite-slider'
-import { ProgressiveBlur } from '@/components/ui/progressive-blur'
 import { cn } from '@/lib/cn'
 import { Menu, X, ChevronRight, TrendingUp } from 'lucide-react'
 import { useScroll, motion } from 'framer-motion'
@@ -59,20 +59,22 @@ export function HeroSection() {
               </div>
             </div>
 
-            {/* Video Background Container */}
+            {/* Video Background Container - Optimized */}
             <div className="aspect-[2/3] absolute inset-1 overflow-hidden rounded-3xl border border-white/10 sm:aspect-video lg:rounded-[3rem]">
               <video
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="size-full object-cover opacity-50"
+                preload="metadata"
+                poster="/videos/hero-poster.webp"
+                className="size-full object-cover opacity-60"
               >
+                <source src="/videos/hero-bg.webm" type="video/webm" />
                 <source src="/videos/hero-bg.mp4" type="video/mp4" />
               </video>
-              {/* Gradient Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+              {/* Single combined gradient overlay for better performance */}
+              <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/40 to-transparent" />
             </div>
           </div>
         </section>
@@ -93,19 +95,9 @@ export function HeroSection() {
                   ))}
                 </InfiniteSlider>
 
-                {/* Fade edges */}
-                <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[var(--color-background)] to-transparent pointer-events-none" />
-                <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[var(--color-background)] to-transparent pointer-events-none" />
-                <ProgressiveBlur
-                  className="pointer-events-none absolute left-0 top-0 h-full w-20"
-                  direction="left"
-                  blurIntensity={1}
-                />
-                <ProgressiveBlur
-                  className="pointer-events-none absolute right-0 top-0 h-full w-20"
-                  direction="right"
-                  blurIntensity={1}
-                />
+                {/* Simple gradient fade edges - performant replacement for ProgressiveBlur */}
+                <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--color-background)] via-[var(--color-background)]/80 to-transparent pointer-events-none" />
+                <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--color-background)] via-[var(--color-background)]/80 to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
@@ -137,10 +129,13 @@ const companyLogos = [
 function CompanyLogo({ name, src }: { name: string; src: string }) {
   return (
     <div className="flex items-center justify-center h-10 px-4">
-      <img
+      <Image
         src={src}
         alt={name}
+        width={100}
+        height={24}
         className="h-6 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+        loading="lazy"
       />
     </div>
   )

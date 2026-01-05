@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/cn';
 import { useMotionValue, animate, motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useMeasure from 'react-use-measure';
 
 type InfiniteSliderProps = {
@@ -29,9 +29,45 @@ export function InfiniteSlider({
   const translation = useMotionValue(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [key, setKey] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isVisible = useRef(true);
+  const controlsRef = useRef<ReturnType<typeof animate> | null>(null);
+
+  // Visibility observer - pause animation when not in viewport
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible.current = entries[0].isIntersecting;
+        if (!entries[0].isIntersecting && controlsRef.current) {
+          controlsRef.current.pause();
+        } else if (entries[0].isIntersecting && controlsRef.current) {
+          controlsRef.current.play();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  // Check for reduced motion preference
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
 
   useEffect(() => {
-    let controls;
+    // Don't animate if reduced motion is preferred
+    if (prefersReducedMotion) return;
+
     const size = direction === 'horizontal' ? width : height;
     const contentSize = size + gap;
     const from = reverse ? -contentSize / 2 : 0;
@@ -42,7 +78,7 @@ export function InfiniteSlider({
 
     if (isTransitioning) {
       const transitionDuration = Math.abs((translation.get() - to) / (speedOnHover || speed));
-      controls = animate(translation, [translation.get(), to], {
+      controlsRef.current = animate(translation, [translation.get(), to], {
         ease: 'linear',
         duration: transitionDuration,
         onComplete: () => {
@@ -51,7 +87,7 @@ export function InfiniteSlider({
         },
       });
     } else {
-      controls = animate(translation, [from, to], {
+      controlsRef.current = animate(translation, [from, to], {
         ease: 'linear',
         duration: duration,
         repeat: Infinity,
@@ -61,9 +97,14 @@ export function InfiniteSlider({
           translation.set(from);
         },
       });
+
+      // Start paused if not visible
+      if (!isVisible.current && controlsRef.current) {
+        controlsRef.current.pause();
+      }
     }
 
-    return controls?.stop;
+    return () => controlsRef.current?.stop();
   }, [
     key,
     translation,
@@ -76,6 +117,7 @@ export function InfiniteSlider({
     isTransitioning,
     direction,
     reverse,
+    prefersReducedMotion,
   ]);
 
   const hoverProps = speedOnHover
@@ -91,8 +133,25 @@ export function InfiniteSlider({
       }
     : {};
 
+  // If reduced motion, just show static content
+  if (prefersReducedMotion) {
+    return (
+      <div ref={containerRef} className={cn('overflow-hidden', className)}>
+        <div
+          className="flex w-max"
+          style={{
+            gap: `${gap}px`,
+            flexDirection: direction === 'horizontal' ? 'row' : 'column',
+          }}
+        >
+          {children}
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={cn('overflow-hidden', className)}>
+    <div ref={containerRef} className={cn('overflow-hidden', className)}>
       <motion.div
         className="flex w-max"
         style={{

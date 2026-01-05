@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, TrendingDown, Clock, Wallet, MessageCircleWarning } from "lucide-react";
 import DisplayCards from "@/components/ui/display-cards";
 
+// Optimized statistics cards - removed expensive grayscale filter
 const statistics = [
   {
     value: "89%",
@@ -12,7 +13,7 @@ const statistics = [
     date: "SEBI's harsh reality",
     icon: <TrendingDown className="size-4 text-white" />,
     className:
-      "[grid-area:stack] hover:-translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+      "[grid-area:stack] hover:-translate-y-10 opacity-60 hover:opacity-100 before:absolute before:inset-0 before:rounded-xl before:bg-background/40 before:transition-opacity before:duration-300 hover:before:opacity-0",
   },
   {
     value: "15 days",
@@ -20,7 +21,7 @@ const statistics = [
     date: "vs 3+ years recommended",
     icon: <Clock className="size-4 text-white" />,
     className:
-      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+      "[grid-area:stack] translate-x-12 translate-y-10 hover:-translate-y-1 opacity-70 hover:opacity-100 before:absolute before:inset-0 before:rounded-xl before:bg-background/30 before:transition-opacity before:duration-300 hover:before:opacity-0",
   },
   {
     value: "₹1.8L Cr",
@@ -28,7 +29,7 @@ const statistics = [
     date: "Real savings lost",
     icon: <Wallet className="size-4 text-white" />,
     className:
-      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10 before:absolute before:w-[100%] before:outline-1 before:rounded-xl before:outline-border before:h-[100%] before:content-[''] before:bg-blend-overlay before:bg-background/50 grayscale-[100%] hover:before:opacity-0 before:transition-opacity before:duration-700 hover:grayscale-0 before:left-0 before:top-0",
+      "[grid-area:stack] translate-x-24 translate-y-20 hover:translate-y-10 opacity-80 hover:opacity-100 before:absolute before:inset-0 before:rounded-xl before:bg-background/20 before:transition-opacity before:duration-300 hover:before:opacity-0",
   },
   {
     value: "70%",
@@ -36,7 +37,7 @@ const statistics = [
     date: "Within 24hrs",
     icon: <MessageCircleWarning className="size-4 text-white" />,
     className:
-      "[grid-area:stack] translate-x-36 translate-y-[7.5rem] hover:translate-y-20",
+      "[grid-area:stack] translate-x-36 translate-y-[7.5rem] hover:translate-y-20 opacity-90 hover:opacity-100",
   },
 ];
 
