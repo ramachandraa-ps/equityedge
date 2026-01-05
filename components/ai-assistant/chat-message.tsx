@@ -129,7 +129,7 @@ function formatMarkdown(text: string): string {
     .replace(/\n\n/g, '</p><p>')
     .replace(/\n/g, '<br/>')
     // Wrap in paragraph
-    .replace(/^(.+)$/s, '<p>$1</p>')
+    .replace(/^([\s\S]+)$/, '<p>$1</p>')
     // Clean up empty paragraphs
     .replace(/<p><\/p>/g, '')
     .replace(/<p>(<h[34])/g, '$1')
