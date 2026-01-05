@@ -10,9 +10,9 @@ const steps = [
     icon: <Search className="w-5 h-5" />,
     title: "Search Any Company",
     description: "Look up any listed Indian company. We'll show you the fundamentals that matter, not the noise.",
-    className: "md:col-span-2",
+    className: "md:col-span-3",
     header: (
-      <div className="relative h-40 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-soft-teal)] to-[var(--color-surface-subtle)] flex items-center justify-center overflow-hidden">
+      <div className="relative h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-soft-teal)] to-[var(--color-surface-subtle)] flex items-center justify-center overflow-hidden">
         <motion.div
           className="absolute inset-0 opacity-20"
           style={{
@@ -22,9 +22,9 @@ const steps = [
           animate={{ backgroundPosition: ["200% 0", "-200% 0"] }}
           transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
         />
-        <div className="relative px-6 py-3 rounded-full bg-[var(--color-canvas)] shadow-lg border border-[var(--color-surface-muted)] flex items-center gap-3">
-          <Search className="w-5 h-5 text-[var(--color-cool-gray)]" />
-          <span className="text-[var(--color-deep-navy)]">Search &quot;Reliance&quot;...</span>
+        <div className="relative px-5 py-2.5 rounded-full bg-[var(--color-canvas)] shadow-lg border border-[var(--color-surface-muted)] flex items-center gap-2">
+          <Search className="w-4 h-4 text-[var(--color-cool-gray)]" />
+          <span className="text-sm text-[var(--color-deep-navy)]">Search &quot;Reliance&quot;...</span>
         </div>
       </div>
     ),
@@ -32,10 +32,11 @@ const steps = [
   {
     icon: <BookOpen className="w-5 h-5" />,
     title: "Learn Key Metrics",
-    description: "Understand P/E, ROE, Debt-to-Equity with plain English explanations. No jargon.",
+    description: "Understand P/E, ROE, Debt-to-Equity with plain English explanations.",
+    className: "md:col-span-2",
     header: (
-      <div className="h-40 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-amber-gold)]/20 to-[var(--color-surface-subtle)] flex items-center justify-center p-4">
-        <div className="space-y-2 w-full">
+      <div className="h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-amber-gold)]/20 to-[var(--color-surface-subtle)] flex items-center justify-center p-3">
+        <div className="space-y-1.5 w-full">
           {["P/E Ratio", "Return on Equity", "Debt-to-Equity"].map((metric, i) => (
             <motion.div
               key={metric}
@@ -43,10 +44,10 @@ const steps = [
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="flex items-center justify-between px-3 py-2 rounded-lg bg-[var(--color-canvas)]/80 backdrop-blur"
+              className="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-[var(--color-canvas)]/80 backdrop-blur"
             >
-              <span className="text-sm font-medium text-[var(--color-deep-navy)]">{metric}</span>
-              <CheckCircle2 className="w-4 h-4 text-[var(--color-success)]" />
+              <span className="text-xs font-medium text-[var(--color-deep-navy)]">{metric}</span>
+              <CheckCircle2 className="w-3.5 h-3.5 text-[var(--color-success)]" />
             </motion.div>
           ))}
         </div>
@@ -56,9 +57,10 @@ const steps = [
   {
     icon: <LineChart className="w-5 h-5" />,
     title: "Analyze Trends",
-    description: "See 5-year revenue, profit, and cash flow trends. Spot red flags before they become problems.",
+    description: "See 5-year revenue, profit, and cash flow trends. Spot red flags early.",
+    className: "md:col-span-2",
     header: (
-      <div className="h-40 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-muted-teal)]/10 to-[var(--color-surface-subtle)] flex items-center justify-center p-4">
+      <div className="h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-muted-teal)]/10 to-[var(--color-surface-subtle)] flex items-center justify-center p-3">
         <svg viewBox="0 0 200 80" className="w-full h-full">
           <motion.path
             d="M 10,60 Q 50,40 80,50 T 130,35 T 190,20"
@@ -90,18 +92,18 @@ const steps = [
   {
     icon: <Bot className="w-5 h-5" />,
     title: "Ask Our AI Assistant",
-    description: "Have questions? Our AI explains complex concepts in simple terms. It teaches, never recommends.",
-    className: "md:col-span-2",
+    description: "Have questions? Our AI explains complex concepts in simple terms.",
+    className: "md:col-span-3",
     header: (
-      <div className="h-40 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-slate-blue)]/5 to-[var(--color-surface-subtle)] flex items-end p-4">
-        <div className="w-full space-y-2">
+      <div className="h-32 rounded-[var(--radius-xl)] bg-gradient-to-br from-[var(--color-slate-blue)]/5 to-[var(--color-surface-subtle)] flex items-end p-3">
+        <div className="w-full space-y-1.5">
           <div className="flex justify-end">
-            <div className="px-4 py-2 rounded-2xl rounded-br-sm bg-[var(--color-muted-teal)] text-white text-sm max-w-[200px]">
+            <div className="px-3 py-1.5 rounded-2xl rounded-br-sm bg-[var(--color-muted-teal)] text-white text-xs max-w-[160px]">
               What does high P/E ratio mean?
             </div>
           </div>
           <div className="flex justify-start">
-            <div className="px-4 py-2 rounded-2xl rounded-bl-sm bg-[var(--color-surface-muted)] text-[var(--color-deep-navy)] text-sm max-w-[280px]">
+            <div className="px-3 py-1.5 rounded-2xl rounded-bl-sm bg-[var(--color-surface-muted)] text-[var(--color-deep-navy)] text-xs max-w-[220px]">
               <TextShimmer shimmerWidth={50} as="span">
                 A high P/E suggests investors expect strong future growth...
               </TextShimmer>
@@ -135,7 +137,7 @@ export function HowItWorksSection() {
           </p>
         </motion.div>
 
-        <BentoGrid className="md:auto-rows-[240px]">
+        <BentoGrid className="md:auto-rows-[220px]">
           {steps.map((step, index) => (
             <BentoGridItem
               key={index}
