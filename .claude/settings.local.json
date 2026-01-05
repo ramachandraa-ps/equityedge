@@ -13,7 +13,8 @@
       "Bash(npm run build:*)",
       "Bash(npm run dev:*)",
       "WebFetch(domain:21st.dev)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:www.nseindia.com)"
     ]
   }
 }

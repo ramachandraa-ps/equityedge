@@ -87,15 +87,10 @@ export function HeroSection() {
                 </p>
               </div>
               <div className="relative py-6 md:w-[calc(100%-11rem)]">
-                <InfiniteSlider speedOnHover={20} speed={40} gap={112}>
-                  <CompanyLogo name="Google" />
-                  <CompanyLogo name="Microsoft" />
-                  <CompanyLogo name="Amazon" />
-                  <CompanyLogo name="Infosys" />
-                  <CompanyLogo name="TCS" />
-                  <CompanyLogo name="Wipro" />
-                  <CompanyLogo name="Zerodha" />
-                  <CompanyLogo name="Groww" />
+                <InfiniteSlider speedOnHover={40} speed={80} gap={112}>
+                  {companyLogos.map((company) => (
+                    <CompanyLogo key={company.name} name={company.name} src={company.src} />
+                  ))}
                 </InfiniteSlider>
 
                 {/* Fade edges */}
@@ -121,15 +116,32 @@ export function HeroSection() {
 }
 
 // ============================================================================
-// COMPANY LOGO COMPONENT
+// COMPANY LOGOS - Local logo files
 // ============================================================================
 
-function CompanyLogo({ name }: { name: string }) {
+const companyLogos = [
+  { name: 'Zerodha', src: '/logos/Zerodha_logo.png' },
+  { name: 'Groww', src: '/logos/groww_logo.webp' },
+  { name: 'Upstox', src: '/logos/upstox-new-logo.svg' },
+  { name: 'Angel One', src: '/logos/Angel_One_Logo.png' },
+  { name: 'NSE', src: '/logos/NSE_Logo.svg' },
+  { name: 'BSE', src: '/logos/BSE_logo.svg' },
+  { name: 'HDFC Bank', src: '/logos/HDFC_Bank_Logo.png' },
+  { name: 'ICICI Bank', src: '/logos/ICICI_Bank_Logo.png' },
+]
+
+// ============================================================================
+// COMPANY LOGO COMPONENT - Image-based logos
+// ============================================================================
+
+function CompanyLogo({ name, src }: { name: string; src: string }) {
   return (
-    <div className="flex items-center justify-center">
-      <span className="text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
-        {name}
-      </span>
+    <div className="flex items-center justify-center h-10 px-4">
+      <img
+        src={src}
+        alt={name}
+        className="h-6 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity duration-300"
+      />
     </div>
   )
 }
