@@ -11,7 +11,7 @@ export { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
 export { TextRotate } from "./text-rotate";
 export { ContainerScroll } from "./container-scroll-animation";
 export { BentoGrid, BentoGridItem } from "./bento-grid";
-export { DisplayCards } from "./display-cards";
+export { default as DisplayCards } from "./display-cards";
 export { TextShimmer } from "./text-shimmer";
 export { MorphingPopover } from "./morphing-popover";
 export { NumberTicker } from "./number-ticker";

@@ -15,7 +15,8 @@
       "WebFetch(domain:21st.dev)",
       "WebSearch",
       "WebFetch(domain:www.nseindia.com)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(cat:*)"
     ]
   }
 }
