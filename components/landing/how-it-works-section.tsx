@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Search, BookOpen, LineChart, Bot, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { Plasma } from "@/components/ui/plasma";
 
 const steps = [
   {
@@ -69,13 +70,15 @@ export function HowItWorksSection() {
   return (
     <section className="py-24 lg:py-32 bg-[var(--color-surface)] relative overflow-hidden">
       {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-text-primary) 1px, transparent 0)`,
-            backgroundSize: "48px 48px",
-          }}
+      {/* Plasma background */}
+      <div className="absolute inset-0 opacity-30">
+        <Plasma
+          color="#ff6b35"
+          speed={0.6}
+          direction="forward"
+          scale={1.1}
+          opacity={0.8}
+          mouseInteractive={true}
         />
       </div>
 

@@ -3,7 +3,7 @@ import {
   AIShowcaseScroll,
   StatisticsShowcase,
   HowItWorksSection,
-  TestimonialsSection,
+
   CTASection,
 } from "@/components/landing";
 
@@ -14,7 +14,7 @@ export default function LandingPage() {
       <AIShowcaseScroll />
       <StatisticsShowcase />
       <HowItWorksSection />
-      <TestimonialsSection />
+
       <CTASection />
     </>
   );
