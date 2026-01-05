@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Search, BookOpen, LineChart, Bot, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Plasma } from "@/components/ui/plasma";
+import { CardSpotlight } from "@/components/ui/card-spotlight";
 
 const steps = [
   {
@@ -11,8 +12,8 @@ const steps = [
     icon: Search,
     title: "Search Any Company",
     description: "Look up any listed Indian company and get instant access to fundamentals that matter.",
-    color: "var(--color-accent)",
-    bgColor: "var(--color-accent-subtle)",
+    // color: "#2563eb", // blue-600
+    canvasColors: [[59, 130, 246]], // blue
     link: "/company/search",
   },
   {
@@ -20,8 +21,8 @@ const steps = [
     icon: BookOpen,
     title: "Learn Key Metrics",
     description: "Understand P/E, ROE, and Debt-to-Equity with plain English explanations.",
-    color: "var(--color-blue-600)",
-    bgColor: "rgba(59, 130, 246, 0.15)",
+    // color: "#a855f7", // purple-500
+    canvasColors: [[168, 85, 247]], // purple
     link: "/company/search",
   },
   {
@@ -29,8 +30,8 @@ const steps = [
     icon: LineChart,
     title: "Analyze Trends",
     description: "See 5-year revenue, profit, and cash flow trends. Spot red flags early.",
-    color: "var(--color-success)",
-    bgColor: "var(--color-success-light)",
+    // color: "#10b981", // emerald-500
+    canvasColors: [[16, 185, 129]], // emerald
     link: "/market-statistics",
   },
   {
@@ -38,144 +39,104 @@ const steps = [
     icon: Bot,
     title: "Ask AI Assistant",
     description: "Get complex concepts explained in simple terms. It teaches, never recommends.",
-    color: "var(--color-info)",
-    bgColor: "var(--color-info-light)",
+    // color: "#f97316", // orange-500
+    canvasColors: [[249, 115, 22]], // orange
     link: "/ai-assistant",
   },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.16, 1, 0.3, 1] as const,
-    },
-  },
-};
-
 export function HowItWorksSection() {
   return (
-    <section className="py-24 lg:py-32 bg-[var(--color-surface)] relative overflow-hidden">
-      {/* Subtle background pattern */}
-      {/* Plasma background */}
-      <div className="absolute inset-0 opacity-30">
+    <section className="py-24 lg:py-32 bg-black relative overflow-hidden antialiased">
+      {/* Plasma background covering the entire section */}
+      <div className="absolute inset-0 z-0">
         <Plasma
-          color="#ff6b35"
-          speed={0.6}
+          color="#3b82f6" // Brighter blue
+          speed={0.5}
           direction="forward"
-          scale={1.1}
-          opacity={0.8}
+          scale={1.2}
+          opacity={0.6}
           mouseInteractive={true}
         />
+        {/* Lighter overlay to show plasma */}
+        <div className="absolute inset-0 bg-black/20 backdrop-blur-[1px]" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[var(--color-accent-subtle)] text-[var(--color-accent)] text-sm font-medium mb-4">
-            Your Learning Journey
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--color-text-primary)] mb-4">
-            How EquityEdge Works
-          </h2>
-          <p className="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
-            Four simple steps to transform from a tip-follower to a confident, informed investor.
-          </p>
-        </motion.div>
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <span className="inline-block px-4 py-1.5 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-6 border border-blue-500/20">
+              Your Learning Journey
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+              Master the Markets <br className="hidden md:block" /> with <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">EquityEdge</span>
+            </h2>
+            <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+              We've simplified the path from beginner to pro. Follow these steps to build your confidence and portfolio.
+            </p>
+          </motion.div>
+        </div>
 
-        {/* Steps Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6"
-        >
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
               <motion.div
                 key={index}
-                variants={itemVariants}
-                className="group relative"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
               >
-                <Link href={step.link}>
-                  <div className="relative h-full p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] hover:border-[var(--color-accent)]/40 transition-all duration-300 hover:shadow-lg cursor-pointer overflow-hidden">
-                    {/* Step number watermark */}
-                    <span
-                      className="absolute -top-4 -right-2 text-[120px] font-black leading-none opacity-[0.03] select-none pointer-events-none"
-                      style={{ color: step.color }}
-                    >
-                      {step.number}
-                    </span>
-
-                    {/* Content */}
-                    <div className="relative z-10 flex gap-4">
-                      {/* Icon */}
-                      <div
-                        className="flex-shrink-0 w-14 h-14 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                        style={{ backgroundColor: step.bgColor }}
-                      >
-                        <Icon className="w-6 h-6" style={{ color: step.color }} />
+                <Link href={step.link} className="block h-full">
+                  <CardSpotlight className="h-full flex flex-col justify-between p-8 bg-neutral-900/50 border-neutral-800 hover:border-neutral-700 transition-colors group cursor-pointer">
+                    <div className="relative z-20">
+                      <div className="w-12 h-12 rounded-lg bg-neutral-800 flex items-center justify-center mb-6 group-hover:bg-neutral-700 transition-colors">
+                        <Icon className="w-6 h-6 text-neutral-300 group-hover:text-white transition-colors" />
                       </div>
 
-                      {/* Text */}
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-2">
-                          <span
-                            className="text-xs font-bold tracking-wider"
-                            style={{ color: step.color }}
-                          >
-                            STEP {step.number}
-                          </span>
-                        </div>
-                        <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2 group-hover:text-[var(--color-accent)] transition-colors">
+                      <div className="mb-4">
+                        <span className="text-sm font-mono text-neutral-500 mb-2 block">0{index + 1}</span>
+                        <h3 className="text-xl font-bold text-neutral-100 mb-2 group-hover:text-white transition-colors">
                           {step.title}
                         </h3>
-                        <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                        <p className="text-neutral-400 text-sm leading-relaxed">
                           {step.description}
                         </p>
                       </div>
-
-                      {/* Arrow */}
-                      <div className="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0">
-                        <ArrowRight className="w-5 h-5 text-[var(--color-accent)]" />
-                      </div>
                     </div>
 
-                    {/* Bottom accent line */}
-                    <div
-                      className="absolute bottom-0 left-0 right-0 h-1 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"
-                      style={{ backgroundColor: step.color }}
-                    />
-                  </div>
+                    <div className="relative z-20 mt-6 flex items-center text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">
+                      <span>Get Started</span>
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </div>
+
+                    {/* Custom reveal colors per card if supported by CardSpotlight/CanvasReveal, 
+                            currently CardSpotlight has hardcoded colors or takes a prop? 
+                            Let's check CardSpotlight definition I made. 
+                            It takes 'radius', 'color' (for slotlight), but CanvasReveal colors are inside it.
+                            I should pass children to CardSpotlight that ARE the CanvasReveal for customizability, 
+                            OR modify CardSpotlight to accept colors.
+                            
+                            Wait, my previous CardSpotlight implementation has CanvasRevealEffect HARDCODED inside it.
+                            I should probably update CardSpotlight to accept 'canvasRevealColors' prop or similar,
+                            OR I can stick to the blue/purple generic one I made which looks good on dark.
+                            
+                            For now, I'll stick to the implementation I wrote which has a nice generic reveal.
+                        */}
+                  </CardSpotlight>
                 </Link>
               </motion.div>
             );
           })}
-        </motion.div>
-
-        {/* Connection line decoration for desktop */}
-        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-px h-32 bg-gradient-to-b from-transparent via-[var(--color-border)] to-transparent pointer-events-none" />
+        </div>
       </div>
     </section>
   );

@@ -14,7 +14,8 @@
       "Bash(npm run dev:*)",
       "WebFetch(domain:21st.dev)",
       "WebSearch",
-      "WebFetch(domain:www.nseindia.com)"
+      "WebFetch(domain:www.nseindia.com)",
+      "Bash(ls:*)"
     ]
   }
 }
